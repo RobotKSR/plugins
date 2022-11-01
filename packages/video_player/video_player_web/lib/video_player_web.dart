@@ -73,12 +73,18 @@ class VideoPlayerPlugin extends VideoPlayerPlatform {
             'web implementation of video_player cannot play content uri'));
     }
 
+    final SourceElement sourceElement = SourceElement()
+      ..src = uri
+      ..type = 'application/x-mpegURL';
+    
     final VideoElement videoElement = VideoElement()
       ..id = 'videoElement-$textureId'
       ..src = uri
       ..style.border = 'none'
       ..style.height = '100%'
       ..style.width = '100%';
+    
+    videoElement.append(sourceElement);
 
     // TODO(hterkelsen): Use initialization parameters once they are available
     ui.platformViewRegistry.registerViewFactory(
